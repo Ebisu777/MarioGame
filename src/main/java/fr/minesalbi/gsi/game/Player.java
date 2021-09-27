@@ -23,18 +23,28 @@
  ******************************************************************************/
 package fr.minesalbi.gsi.game;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
-import com.dongbat.jbump.*;
+import com.dongbat.jbump.Collision;
+import com.dongbat.jbump.CollisionFilter;
+import com.dongbat.jbump.Collisions;
+import com.dongbat.jbump.Item;
+import com.dongbat.jbump.Rect;
+import com.dongbat.jbump.Response;
 import com.dongbat.jbump.Response.Result;
 
 
 
 public class Player extends Entity {
+	protected static int CPT = 0;
+	private int id;
 	public final Animation<AtlasRegion> walk = new Animation<>(1 / 30f, game.textureAtlas.findRegions("m-player-walk"), PlayMode.LOOP);
 	public  final Animation<AtlasRegion> stand = new Animation<>(1 / 30f, game.textureAtlas.findRegions("m-player-stand"), PlayMode.LOOP);
 	public  final Animation<AtlasRegion> jump = new Animation<>(1 / 30f, game.textureAtlas.findRegions("m-player-jump"), PlayMode.LOOP);
@@ -63,6 +73,8 @@ public class Player extends Entity {
 		bboxWidth = 70;
 		bboxHeight = 130;
 		item = new Item<>(this);
+		id = CPT;
+		CPT++;
 	}
 
 	@Override
@@ -72,10 +84,21 @@ public class Player extends Entity {
 
 		//handle movement and input
 		deltaX = Utils.approach(deltaX, 0, FRICTION * delta);
-		boolean left = Gdx.input.isKeyPressed(Keys.LEFT);
-		boolean right = Gdx.input.isKeyPressed(Keys.RIGHT);
-		boolean up = Gdx.input.isKeyPressed(Keys.UP);
-		boolean upJustPressed = Gdx.input.isKeyJustPressed(Keys.UP);
+		int keyLeft = -1, keyRight = -1, keyUp = -1;
+		if (this.id == 0) {
+			keyLeft = Keys.LEFT;
+			keyRight = Keys.RIGHT;
+			keyUp = Keys.UP;
+		} else if (this.id == 1){
+			keyLeft = Keys.A;
+			keyRight = Keys.D;
+			keyUp = Keys.W;
+		}
+		boolean left = Gdx.input.isKeyPressed(keyLeft);
+		boolean right = Gdx.input.isKeyPressed(keyRight);
+		boolean up = Gdx.input.isKeyPressed(keyUp);
+		boolean upJustPressed = Gdx.input.isKeyJustPressed(keyUp);
+
 		if (right) {
 			animation = walk;
 			flipX = false;
@@ -169,7 +192,18 @@ public class Player extends Entity {
 		}
 
 		//update camera
-		game.camera.position.set(x, y, 0);
+		float oldX = game.camera.position.x;
+		float oldY = game.camera.position.y;
+		game.camera.translate(x - oldX, y - oldY);
+		for (Entity e: game.entities) {
+			if (e instanceof Player && e != this) {
+				float[] newView = Utils.changeView(this.x, this.y, e.x, e.y, game.camera.viewportWidth,
+						game.camera.viewportHeight);
+				game.camera.translate(newView[0] -x , newView[1] -y, 0);// position.set(newView[0], newView[1], 0);
+				game.camera.zoom = newView[2];
+			}
+		}
+
 	}
 
 	/**

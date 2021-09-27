@@ -24,24 +24,50 @@
 package fr.minesalbi.gsi.game;
 
 public class Utils {
-    /**
-     * Returns a value closer to a goal amount by the given increment.
-     */
-    public static float approach(float start, float target, float increment) {
-        increment = Math.abs(increment);
-        if (start < target) {
-            start += increment;
-            
-            if (start > target) {
-                start = target;
-            }
-        } else {
-            start -= increment;
-            
-            if (start < target) {
-                start = target;
-            }
-        }
-        return start;
-    }
+	/**
+	 * Returns a value closer to a goal amount by the given increment.
+	 */
+	public static float approach(float start, float target, float increment) {
+		increment = Math.abs(increment);
+		if (start < target) {
+			start += increment;
+
+			if (start > target) {
+				start = target;
+			}
+		} else {
+			start -= increment;
+
+			if (start < target) {
+				start = target;
+			}
+		}
+		return start;
+	}
+
+	public static boolean inside(float x, float y, float cx, float cy, float cwidth, float cheight) {
+		float cxmin = cx - cwidth/2;
+		float cxmax = cx + cwidth/2;
+		float cymin = cy - cheight/2;
+		float cymax = cy + cheight/2;
+
+		if (x > cxmin && x < cxmax &&
+				y > cymin && y < cymax)
+			return true;
+
+		return false;
+	}
+	
+	public static float[] changeView(float px1, float py1, float px2, float py2, float cameraViewPortWidth, float cameraViewPortHeight) {
+		float[] res = new float[4]; // cx, cy, cwidth, cheight
+		float cx = (px1 + px2) / 2;
+		float cy = (py1 + py2) / 2;
+		float cwidth = Math.abs(px1 - px2)  + 300;
+		float cheight = Math.abs(py1 - py2) + 300;
+		float zoomW = (cwidth / cameraViewPortWidth) < 1 ? 1: (cwidth / cameraViewPortWidth);
+		float zoomH = (cheight / cameraViewPortHeight) < 1 ? 1: (cheight / cameraViewPortHeight);
+		res = new float[]{cx, cy, Math.max(zoomW, zoomH)};
+		System.out.println("width " + cwidth + " zoom " + zoomW);
+		return res;
+	}
 }
