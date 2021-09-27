@@ -94,10 +94,10 @@ public class Player extends Entity {
 			keyRight = Keys.D;
 			keyUp = Keys.W;
 		}
-		boolean left = Gdx.input.isKeyPressed(keyLeft);
-		boolean right = Gdx.input.isKeyPressed(keyRight);
-		boolean up = Gdx.input.isKeyPressed(keyUp);
-		boolean upJustPressed = Gdx.input.isKeyJustPressed(keyUp);
+		boolean left = keyLeft>0 ? Gdx.input.isKeyPressed(keyLeft) : false;
+		boolean right = keyRight>0 ? Gdx.input.isKeyPressed(keyRight): false;
+		boolean up = keyUp>0 ?Gdx.input.isKeyPressed(keyUp): false;
+		boolean upJustPressed = keyUp>0 ? Gdx.input.isKeyJustPressed(keyUp): false;
 
 		if (right) {
 			animation = walk;
@@ -173,6 +173,7 @@ public class Player extends Entity {
 						game.entities.removeValue(this, true);
 						game.world.remove(item);
 						hurtSound.play();
+						this.updateCamera();
 					}
 				}
 			}
@@ -191,19 +192,30 @@ public class Player extends Entity {
 			animation = wall;
 		}
 
+		this.updateCamera();
+
+	}
+	
+	private void updateCamera() {
 		//update camera
-		float oldX = game.camera.position.x;
-		float oldY = game.camera.position.y;
-		game.camera.translate(x - oldX, y - oldY);
-		for (Entity e: game.entities) {
-			if (e instanceof Player && e != this) {
-				float[] newView = Utils.changeView(this.x, this.y, e.x, e.y, game.camera.viewportWidth,
+				float oldX = game.camera.position.x;
+				float oldY = game.camera.position.y;
+				game.camera.translate(x - oldX, y - oldY);
+				List<Player> players = new ArrayList<Player>();
+				for (Entity e: game.entities) {
+					if (e instanceof Player) {// && e != this) {
+						players.add((Player)e);
+					}
+				}
+				float[][] playersCoords = new float[players.size()][2];
+				int j = 0;
+				for (Player p: players) {
+					playersCoords[j++] = new float[] {p.x, p.y};
+				}
+				float[] newView = Utils.changeView(playersCoords, game.camera.viewportWidth,
 						game.camera.viewportHeight);
 				game.camera.translate(newView[0] -x , newView[1] -y, 0);// position.set(newView[0], newView[1], 0);
 				game.camera.zoom = newView[2];
-			}
-		}
-
 	}
 
 	/**

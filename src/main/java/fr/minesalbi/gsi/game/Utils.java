@@ -58,8 +58,26 @@ public class Utils {
 		return false;
 	}
 	
-	public static float[] changeView(float px1, float py1, float px2, float py2, float cameraViewPortWidth, float cameraViewPortHeight) {
+	public static float[] changeView(float[][] coordsPlayers, float cameraViewPortWidth, float cameraViewPortHeight) {
 		float[] res = new float[4]; // cx, cy, cwidth, cheight
+		float px1 = Float.MAX_VALUE; // xmin
+		float px2 = Float.MIN_NORMAL; // xmax
+		float py1 = Float.MAX_VALUE; // ymin
+		float py2 = Float.MIN_VALUE; // ymax
+		for(int i=0 ; i < coordsPlayers.length ; i++) {
+			if (coordsPlayers[i][0]< px1) {
+				px1 = coordsPlayers[i][0];
+			}
+			if (coordsPlayers[i][0] > px2) {
+				px2 = coordsPlayers[i][0];
+			}
+			if (coordsPlayers[i][1] < py1) {
+				py1 = coordsPlayers[i][1];
+			}
+			if (coordsPlayers[i][1] > py2) {
+				py2 = coordsPlayers[i][1];
+			}
+		}
 		float cx = (px1 + px2) / 2;
 		float cy = (py1 + py2) / 2;
 		float cwidth = Math.abs(px1 - px2)  + 300;
@@ -67,7 +85,6 @@ public class Utils {
 		float zoomW = (cwidth / cameraViewPortWidth) < 1 ? 1: (cwidth / cameraViewPortWidth);
 		float zoomH = (cheight / cameraViewPortHeight) < 1 ? 1: (cheight / cameraViewPortHeight);
 		res = new float[]{cx, cy, Math.max(zoomW, zoomH)};
-		System.out.println("width " + cwidth + " zoom " + zoomW);
 		return res;
 	}
 }
