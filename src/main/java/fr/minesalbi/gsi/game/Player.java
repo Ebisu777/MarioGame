@@ -176,6 +176,12 @@ public class Player extends Entity {
 						this.updateCamera();
 					}
 				}
+			} else if (collision.other.userData instanceof Player) {
+				if (collision.normal.y == 1) {
+					deltaY = BOUNCE_SPEED;
+					jumping = true;
+					jumpSound.play();
+				}
 			}
 		}
 
@@ -195,27 +201,29 @@ public class Player extends Entity {
 		this.updateCamera();
 
 	}
-	
+
 	private void updateCamera() {
 		//update camera
-				float oldX = game.camera.position.x;
-				float oldY = game.camera.position.y;
-				game.camera.translate(x - oldX, y - oldY);
-				List<Player> players = new ArrayList<Player>();
-				for (Entity e: game.entities) {
-					if (e instanceof Player) {// && e != this) {
-						players.add((Player)e);
-					}
-				}
-				float[][] playersCoords = new float[players.size()][2];
-				int j = 0;
-				for (Player p: players) {
-					playersCoords[j++] = new float[] {p.x, p.y};
-				}
-				float[] newView = Utils.changeView(playersCoords, game.camera.viewportWidth,
-						game.camera.viewportHeight);
-				game.camera.translate(newView[0] -x , newView[1] -y, 0);// position.set(newView[0], newView[1], 0);
-				game.camera.zoom = newView[2];
+		float oldX = game.camera.position.x;
+		float oldY = game.camera.position.y;
+		game.camera.translate(x - oldX, y - oldY);
+		List<Player> players = new ArrayList<Player>();
+		for (Entity e: game.entities) {
+			if (e instanceof Player) {// && e != this) {
+				players.add((Player)e);
+			}
+		}
+		float[][] playersCoords = new float[players.size()][2];
+		int j = 0;
+		for (Player p: players) {
+			playersCoords[j++] = new float[] {p.x, p.y};
+		}
+		float[] newView = Utils.changeView(playersCoords, game.camera.viewportWidth,
+				game.camera.viewportHeight);
+		game.camera.translate(newView[0] -x , newView[1] -y, 0);// position.set(newView[0], newView[1], 0);
+		game.camera.zoom = newView[2];
+
+
 	}
 
 	/**
@@ -224,7 +232,7 @@ public class Player extends Entity {
 	public static class PlayerCollisionFilter implements CollisionFilter {
 		@Override
 		public Response filter(Item item, Item other) {
-			if (other.userData instanceof Block) return Response.slide;
+			if (other.userData instanceof Block || other.userData instanceof Player) return Response.slide;
 			else if (other.userData instanceof Enemy) return Response.cross;
 			return null;
 		}

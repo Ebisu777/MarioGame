@@ -10,6 +10,8 @@ public class BumpScreen implements Screen {
 
 	private BumpGame game;
 
+	private float offset =  0f;
+
 	public BumpScreen(final BumpGame game) {
 		this.game = game;
 		this.game.loadMap();
@@ -23,13 +25,22 @@ public class BumpScreen implements Screen {
 			this.game.loadMap();
 		}
 
-		Gdx.gl.glClearColor(1, 1, 1, 1);
+		Gdx.gl.glClearColor(0.5f, 0.6f, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		//prepare batch
 		game.viewport.apply();
 		game.spriteBatch.setProjectionMatrix(game.camera.combined);
 		game.spriteBatch.begin();
+		
+		offset +=  (100f * delta);
+        offset = offset % 5000;
+        
+      //  game.spriteBatch.draw(game.backgroundTexture, offset, 0, 5000, 3000);
+      //  game.spriteBatch.draw(game.backgroundTexture, offset - 3000, 0, 3000, 3000);
+      //  game.spriteBatch.draw(game.backgroundTexture, offset + 3000, 0, 3000, 3000);
+		
+		
 
 		//call logic on all entities
 		//float delta = Gdx.graphics.getDeltaTime();

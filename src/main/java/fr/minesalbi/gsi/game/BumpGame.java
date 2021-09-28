@@ -1,7 +1,9 @@
 package fr.minesalbi.gsi.game;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -22,11 +24,13 @@ public class BumpGame extends Game {
 	public  ExtendViewport viewport;
 	public  OrthographicCamera camera;
 	public  SnapshotArray<Entity> entities;
+	public Texture backgroundTexture;
+
 	public  World<Entity> world;
 	public  final String MAP =
 			        "+--------------------------------------------------------------------------------------------------+\n" +
 					"+------------------------+----------------------------------------------------------------------++-+\n" +
-					"+------------------------+-----------------p------------------------------------------------++-----+\n" +
+					"+------------------------+------------------------------------------------------------------++-----+\n" +
 					"+-++--++-----------------+----------------+-+-+-+-+-+-----------------------------------++---------+\n" +
 					"+------------------------+--------------------------------+e-e-e-+------------------++-------------+\n" +
 					"+-----------+++++++------+------++------------------------++++++++--------------++-----------------+\n" +
@@ -76,6 +80,7 @@ public class BumpGame extends Game {
 	public void create() {
 		spriteBatch = new SpriteBatch();
 		textureAtlas = new TextureAtlas("assets/textures.atlas");
+		backgroundTexture = new Texture(Gdx.files.internal("assets/background.png"));
 		camera = new OrthographicCamera();
 		viewport = new ExtendViewport(800, 800, camera);
 		entities = new SnapshotArray<>();

@@ -10,6 +10,7 @@ public class DesktopLauncher {
       config.title = "BumpGame";
       config.width = 800;
       config.height = 480;
+      //config.fullscreen = true;
       new LwjglApplication(new BumpGame(), config);
    }
 }
