@@ -227,7 +227,7 @@ public class Player extends Entity {
 	public static class PlayerCollisionFilter implements CollisionFilter {
 		@Override
 		public Response filter(Item item, Item other) {
-			if (other.userData instanceof Block || other.userData instanceof Player) return Response.slide;
+			if (other.userData instanceof Block) return Response.slide;
 			else if (other.userData instanceof Enemy) return Response.cross;
 			return null;
 		}
