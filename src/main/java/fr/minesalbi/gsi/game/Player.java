@@ -190,7 +190,7 @@ public class Player extends Entity {
 						game.entities.removeValue(this, true);
 						game.world.remove(item);
 						hurtSound.play();
-						this.updateCamera();
+						//this.updateCamera();
 					}
 				}
 			} else if (collision.other.userData instanceof Player) {
