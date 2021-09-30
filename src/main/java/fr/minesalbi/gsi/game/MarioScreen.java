@@ -35,15 +35,9 @@ public class MarioScreen implements Screen {
 		
 		offset +=  (100f * delta);
         offset = offset % 5000;
-        
-      //  game.spriteBatch.draw(game.backgroundTexture, offset, 0, 5000, 3000);
-      //  game.spriteBatch.draw(game.backgroundTexture, offset - 3000, 0, 3000, 3000);
-      //  game.spriteBatch.draw(game.backgroundTexture, offset + 3000, 0, 3000, 3000);
-		
 		
 
 		//call logic on all entities
-		//float delta = Gdx.graphics.getDeltaTime();
 		Object[] ents = game.entities.begin();
 		for (int i = 0, n = game.entities.size; i < n; i++) {
 			Entity entity = (Entity) ents[i];
@@ -51,7 +45,6 @@ public class MarioScreen implements Screen {
 		}
 		game.entities.end();
 
-		//draw all entities
 		for (Entity entity : game.entities) {
 			entity.draw();
 		}

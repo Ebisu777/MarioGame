@@ -10,7 +10,7 @@ public class DesktopLauncher {
       config.title = "Mario";
       config.width = 1600;
       config.height = 960;
-      config.fullscreen = true;
+     // config.fullscreen = true;
       new LwjglApplication(new MarioGame(), config);
    }
 }
