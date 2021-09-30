@@ -34,7 +34,7 @@ import com.dongbat.jbump.Item;
 public class Block extends Entity {
 
 
-	Block(BumpGame game){
+	Block(MarioGame game){
 		super(game);
 		animation = block;
 		bboxWidth = 100;

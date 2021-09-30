@@ -65,7 +65,7 @@ public class Player extends Entity {
 	private float jumpTime;
 	private boolean jumping;
 
-	public Player(BumpGame game) {
+	public Player(MarioGame game) {
 		super(game);
 		animation = stand;
 		gravityY = -GRAVITY;

@@ -7,10 +7,10 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 public class DesktopLauncher {
    public static void main (String[] arg) {
       LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-      config.title = "BumpGame";
+      config.title = "Mario";
       config.width = 1600;
       config.height = 960;
       config.fullscreen = true;
-      new LwjglApplication(new BumpGame(), config);
+      new LwjglApplication(new MarioGame(), config);
    }
 }

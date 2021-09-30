@@ -17,7 +17,7 @@ import space.earlygrey.shapedrawer.ShapeDrawer;
 /**
  * Initiates the main logic of the game, runs the main game loop, and renders the entities.
  */
-public class BumpGame extends Game {
+public class MarioGame extends Game {
 	public  SpriteBatch spriteBatch;
 	public  TextureAtlas textureAtlas;
 	public  ShapeDrawer shapeDrawer;
@@ -42,7 +42,7 @@ public class BumpGame extends Game {
 	public BitmapFont font;
 	public static float TILE_DIMENSION = 100f;
 
-	public BumpGame() {
+	public MarioGame() {
 		// TODO Auto-generated constructor stub
 	}
 	

@@ -7,10 +7,10 @@ import com.badlogic.gdx.utils.ScreenUtils;
 
 public class MainMenuScreen implements Screen {
 
-	final BumpGame game;
+	final MarioGame game;
 	OrthographicCamera camera;
 
-	public MainMenuScreen(final BumpGame game) {
+	public MainMenuScreen(final MarioGame game) {
 		this.game = game;
 
 		camera = new OrthographicCamera();
@@ -31,7 +31,7 @@ public class MainMenuScreen implements Screen {
 		game.spriteBatch.end();
 
 		if (Gdx.input.isTouched()) {
-			game.setScreen(new BumpScreen(game));
+			game.setScreen(new MarioScreen(game));
 			dispose();
 		}
 	}

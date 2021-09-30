@@ -6,13 +6,13 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 
-public class BumpScreen implements Screen {
+public class MarioScreen implements Screen {
 
-	private BumpGame game;
+	private MarioGame game;
 
 	private float offset =  0f;
 
-	public BumpScreen(final BumpGame game) {
+	public MarioScreen(final MarioGame game) {
 		this.game = game;
 		this.game.loadMap();
 	}

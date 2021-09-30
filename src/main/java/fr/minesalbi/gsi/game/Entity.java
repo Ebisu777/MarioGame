@@ -30,9 +30,9 @@ import com.dongbat.jbump.Item;
 
 public abstract class Entity {
 	
-	protected BumpGame game;
+	protected MarioGame game;
 	
-	public Entity(BumpGame game) {
+	public Entity(MarioGame game) {
 		this.game = game;
 	}
 	

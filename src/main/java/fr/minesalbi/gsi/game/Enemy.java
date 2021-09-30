@@ -35,7 +35,7 @@ import com.dongbat.jbump.Response.Result;
 public class Enemy extends Entity {
 
 
-	Enemy(BumpGame game) {
+	Enemy(MarioGame game) {
 		super(game);
 		animation = enemy;
 		gravityY = -GRAVITY;
