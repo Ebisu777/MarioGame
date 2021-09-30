@@ -37,8 +37,8 @@ public class MainMenuScreen implements Screen {
 		this.mainMenuAnimationTime += delta/2;
 		Animation<AtlasRegion> walk = new Animation<>(1 / 30f, game.textureAtlas.findRegions("m-player-walk"), PlayMode.LOOP);
 		AtlasRegion region = walk.getKeyFrame(mainMenuAnimationTime);
-        game.spriteBatch.draw(region, 200, 300, 50, 50);
-        game.spriteBatch.draw(region, 300, 300, 50, 50);
+        game.spriteBatch.draw(region, mainMenuAnimationTime*150%this.camera.viewportWidth, 300, 50, 50);
+        game.spriteBatch.draw(region, mainMenuAnimationTime*100%this.camera.viewportWidth, 300, 50, 50);
         
         
 		game.font.getData().setScale(2);
