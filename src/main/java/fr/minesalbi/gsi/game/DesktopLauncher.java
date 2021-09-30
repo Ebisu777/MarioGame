@@ -8,9 +8,9 @@ public class DesktopLauncher {
    public static void main (String[] arg) {
       LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
       config.title = "BumpGame";
-      config.width = 800;
-      config.height = 480;
-      //config.fullscreen = true;
+      config.width = 1600;
+      config.height = 960;
+      config.fullscreen = true;
       new LwjglApplication(new BumpGame(), config);
    }
 }

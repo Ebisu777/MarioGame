@@ -24,6 +24,7 @@
 package fr.minesalbi.gsi.game;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import com.badlogic.gdx.Gdx;
@@ -189,7 +190,7 @@ public class Player extends Entity {
 		Rect rect = game.world.getRect(item);
 		if (rect != null) {
 			x = rect.x - bboxX;
-			y = rect.y - bboxY;
+			y = rect.y - bboxY;Calendar.getInstance();
 		}
 
 		//adjust animation based on collisions
@@ -220,7 +221,7 @@ public class Player extends Entity {
 		}
 		float[] newView = Utils.changeView(playersCoords, game.camera.viewportWidth,
 				game.camera.viewportHeight);
-		game.camera.translate(newView[0] -x , newView[1] -y, 0);// position.set(newView[0], newView[1], 0);
+		game.camera.translate(newView[0] - x , newView[1] - y, 0);// position.set(newView[0], newView[1], 0);
 		game.camera.zoom = newView[2];
 
 

@@ -98,7 +98,7 @@
 						<archive>
 							<manifest>
 								<addClasspath>true</addClasspath>
-								<mainClass>fr.minesalbi.gsi.game.DesktopLauncherx</mainClass>
+								<mainClass>fr.minesalbi.gsi.game.DesktopLauncher</mainClass>
 							</manifest>
 						</archive>
 					</configuration>

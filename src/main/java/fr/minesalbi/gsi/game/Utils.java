@@ -79,7 +79,7 @@ public class Utils {
 			}
 		}
 		
-		float cx = (px1 + px2) / 2;
+		float cx = (px1 + px2 + 300) / 2;
 		float cy = (py1 + py2) / 2;
 		float cwidth = Math.abs(px1 - px2)  + 300;
 		float cheight = Math.abs(py1 - py2) + 300;
