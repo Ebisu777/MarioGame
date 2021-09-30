@@ -193,13 +193,7 @@ public class Player extends Entity {
 						//this.updateCamera();
 					}
 				}
-			} else if (collision.other.userData instanceof Player) {
-				if (collision.normal.y == 1) {
-					deltaY = BOUNCE_SPEED;
-					jumping = true;
-					jumpSound.play();
-				}
-			}
+			} 
 		}
 
 		//update position based on collisions
