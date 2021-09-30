@@ -44,15 +44,31 @@ import com.dongbat.jbump.Response.Result;
 
 
 public class Player extends Entity {
+	
+	/* static counter to identify players */
 	protected static int CPT = 0;
+	
+	/* player id */
 	private int id;
+	
+	/*
+	 * player animations
+	 */
 	public final Animation<AtlasRegion> walk = new Animation<>(1 / 30f, game.textureAtlas.findRegions("m-player-walk"), PlayMode.LOOP);
 	public  final Animation<AtlasRegion> stand = new Animation<>(1 / 30f, game.textureAtlas.findRegions("m-player-stand"), PlayMode.LOOP);
 	public  final Animation<AtlasRegion> jump = new Animation<>(1 / 30f, game.textureAtlas.findRegions("m-player-jump"), PlayMode.LOOP);
 	public  final Animation<AtlasRegion> wall = new Animation<>(1 / 30f, game.textureAtlas.findRegions("m-player-wall"), PlayMode.LOOP);
+	
+	/*
+	 * player sounds
+	 */
 	public static final Sound jumpSound = Gdx.audio.newSound(Gdx.files.internal("assets/jump.mp3"));
 	public static final Sound hurtSound = Gdx.audio.newSound(Gdx.files.internal("assets/hurt.mp3"));
 	public static final Sound killSound = Gdx.audio.newSound(Gdx.files.internal("assets/kill.mp3"));
+	
+	/*
+	 * action attributes (collision, speed, gravity)
+	 */
 	public static final PlayerCollisionFilter PLAYER_COLLISION_FILTER = new PlayerCollisionFilter();
 	public static final Collisions tempCollisions = new Collisions();
 	public static final float FRICTION = 250f;

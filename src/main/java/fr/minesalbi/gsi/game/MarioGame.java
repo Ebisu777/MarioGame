@@ -58,9 +58,15 @@ public class MarioGame extends Game {
 			String line = lines[j];
 			for (int i = 0; i < line.length(); i++) {
 				Entity entity = null;
-				if (line.charAt(i) == '+') entity = new Block(this);
-				else if (line.charAt(i) == 'p') entity = new Player(this);
-				else if (line.charAt(i) == 'e') entity = new Enemy(this);
+				if (line.charAt(i) == '+') {
+					entity = new Block(this);
+				}
+				else if (line.charAt(i) == 'p') {
+					entity = new Player(this);
+				}
+				else if (line.charAt(i) == 'e') {
+					entity = new Enemy(this);
+				}
 				
 				if (entity != null) {
 					entities.add(entity);
@@ -87,8 +93,6 @@ public class MarioGame extends Game {
 		world = new World<>(TILE_DIMENSION);
 		shapeDrawer = new ShapeDrawer(spriteBatch, textureAtlas.findRegion("white"));
 		font = new BitmapFont();
-		//load map and spawn entities
-		//loadMap();
 		
 		this.setScreen(new MainMenuScreen(this));
 	}
