@@ -215,33 +215,11 @@ public class Player extends Entity {
 			animation = wall;
 		}
 
-		this.updateCamera();
+		// TODO implement camera update for several players
+		//this.updateCamera();
 
 	}
 
-	private void updateCamera() {
-		//update camera
-		float oldX = game.camera.position.x;
-		float oldY = game.camera.position.y;
-		game.camera.translate(x - oldX, y - oldY);
-		List<Player> players = new ArrayList<Player>();
-		for (Entity e: game.entities) {
-			if (e instanceof Player) {// && e != this) {
-				players.add((Player)e);
-			}
-		}
-		float[][] playersCoords = new float[players.size()][2];
-		int j = 0;
-		for (Player p: players) {
-			playersCoords[j++] = new float[] {p.x, p.y};
-		}
-		float[] newView = Utils.changeView(playersCoords, game.camera.viewportWidth,
-				game.camera.viewportHeight);
-		game.camera.translate(newView[0] - x , newView[1] - y, 0);// position.set(newView[0], newView[1], 0);
-		game.camera.zoom = newView[2];
-
-
-	}
 
 	/**
 	 * Slide on blocks, detect collisions with enemies
