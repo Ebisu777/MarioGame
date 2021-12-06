@@ -12,5 +12,7 @@ public class DesktopLauncher {
       config.height = 960;
      // config.fullscreen = true;
       new LwjglApplication(new MarioGame(), config);
+      
    }
+   
 }

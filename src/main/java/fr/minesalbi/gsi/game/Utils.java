@@ -23,7 +23,11 @@
  ******************************************************************************/
 package fr.minesalbi.gsi.game;
 
+import com.badlogic.gdx.graphics.OrthographicCamera;
+
 public class Utils {
+	public static final float ZOOM_MIN = 1.5f;
+
 	/**
 	 * Returns a value closer to a goal amount by the given increment.
 	 */
@@ -88,4 +92,44 @@ public class Utils {
 		res = new float[]{cx, cy, Math.max(zoomW, zoomH)};
 		return res;
 	}
+	
+	
+	public static void adaptCamera(float[][] coordsPlayers, OrthographicCamera camera) {
+		float xmin = Float.MAX_VALUE; 
+		float xmax = Float.MIN_NORMAL;
+		float ymin = Float.MAX_VALUE; 
+		float ymax = Float.MIN_VALUE; 
+		float cameraViewPortWidth = camera.viewportWidth;
+		float cameraViewPortHeight = camera.viewportHeight;
+		float x = camera.position.x;
+		float y = camera.position.y;
+		
+		/* Retrieve bounding box of players i.e. min and max for their x and y */
+		for(int i=0 ; i < coordsPlayers.length ; i++) {
+			if (coordsPlayers[i][0]< xmin) {
+				xmin = coordsPlayers[i][0];
+			}
+			if (coordsPlayers[i][0] > xmax) {
+				xmax = coordsPlayers[i][0];
+			}
+			if (coordsPlayers[i][1] < ymin) {
+				ymin = coordsPlayers[i][1];
+			}
+			if (coordsPlayers[i][1] > ymax) {
+				ymax = coordsPlayers[i][1];
+			}
+		}
+		
+		float cx = (xmin + xmax + 300) / 2;
+		float cy = (ymin + ymax) / 2;
+		float cwidth = Math.abs(xmin - xmax)  + 300;
+		float cheight = Math.abs(ymin - ymax) + 300;
+		float zoomW = (cwidth / cameraViewPortWidth) < ZOOM_MIN ? ZOOM_MIN: (cwidth / cameraViewPortWidth);
+		float zoomH = (cheight / cameraViewPortHeight) < ZOOM_MIN ? ZOOM_MIN: (cheight / cameraViewPortHeight);
+		
+		
+		camera.translate(cx - x , cy - y, 0);
+		camera.zoom = Math.max(zoomW, zoomH);
+	}
+
 }
