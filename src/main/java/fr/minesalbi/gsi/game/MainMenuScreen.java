@@ -35,6 +35,8 @@ public class MainMenuScreen implements Screen {
 
 		if (Gdx.input.isTouched() || Gdx.input.isKeyPressed(Keys.ANY_KEY)) {
 			//TODO Change Screen
+			game.setScreen(new MarioScreen(game));
+			dispose();
 		}
 	}
 
